@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:surah_list_show_offline/api_services/api_services.dart';
 import 'package:surah_list_show_offline/controllers/data_controller.dart';
 import 'package:surah_list_show_offline/views/sura_details.dart';
 
@@ -17,20 +16,16 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     homePageController.refreshData();
-     homePageController.counter = 1;
   }
+
   @override
   Widget build(BuildContext context) {
+    @override
+    void initState() {
+      super.initState();
+      homePageController.refreshData();
+    }
 
-    // List<Map<String, dynamic>> suraList = [];
-    // bool isLoading = true;
-    // int counter = 0;
-
-    // @override
-    // void initState() {
-    //   super.initState();
-    //   homePageController.refreshData();
-    // }
     return FutureBuilder(
         future: homePageController.refreshData(),
         builder: ((context, snapshot) {
@@ -51,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: ((context) => SurahDetailsPage(
-                                      surahIndex: index,
+                                      surahIndex: index + 1,
                                     ))));
                       },
                     ),
